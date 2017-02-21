@@ -1,5 +1,6 @@
 module TidyI18n
   class TranslationKeys
+    class InvalidEntry < StandardError; end
 
     def self.parse(yaml)
       new(yaml).keys
@@ -15,12 +16,10 @@ module TidyI18n
         self.parsed_keys = []
       end
 
-      def start_stream(*row)
-        # puts "start_stream: #{row.inspect}"
-      end
-
-      def start_document(*row)
-        # puts "start_document: #{row.inspect}"
+      def start_stream(*row); end
+      def start_document(*row); end
+      def start_sequence(*row)
+        raise InvalidEntry.new("\"#{@key_parts.join(".")}\" is not valid")
       end
 
       def start_mapping(*row)
@@ -42,13 +41,8 @@ module TidyI18n
         @key_parts.pop
       end
 
-      def end_document(*row)
-        # puts "end_document: #{row.inspect}"
-      end
-
-      def end_stream(*row)
-        # puts "end_stream: #{row.inspect}"
-      end
+      def end_document(*row); end
+      def end_stream(*row); end
 
       private
 

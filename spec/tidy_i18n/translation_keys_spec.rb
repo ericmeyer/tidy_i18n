@@ -86,4 +86,20 @@ YAML
     keys.map(&:value).should =~ ["Foo1", "Foo2"]
   end
 
+  it "errors on sequences" do
+    yaml = <<YAML
+en:
+  foo: Foo1
+  foo: Foo2
+  bar:
+    - 123
+    - 456
+    - 789
+YAML
+
+    expect {
+      TidyI18n::TranslationKeys.parse(yaml)
+    }.to raise_error(TidyI18n::TranslationKeys::InvalidEntry)
+  end
+
 end
