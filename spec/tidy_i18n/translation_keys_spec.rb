@@ -86,4 +86,69 @@ YAML
     keys.map(&:value).should =~ ["Foo1", "Foo2"]
   end
 
+  describe "Parsing sequences" do
+    it "parses the only sequence when it has one element" do
+      yaml = <<YAML
+en:
+  day_names:
+    - Monday
+YAML
+
+      keys = TidyI18n::TranslationKeys.parse(yaml)
+
+      keys.size.should == 1
+      keys.first.name.should == "en.day_names"
+      keys.first.value.should == ["Monday"]
+    end
+
+    it "has a sequence followed by another key" do
+      yaml = <<YAML
+en:
+  day_names:
+    - Monday
+  foo: "Bar"
+YAML
+
+      keys = TidyI18n::TranslationKeys.parse(yaml)
+
+      keys.size.should == 2
+      keys.first.name.should == "en.day_names"
+      keys.first.value.should == ["Monday"]
+      keys.last.name.should == "en.foo"
+      keys.last.value.should == "Bar"
+    end
+
+    it "has a two elements sequence" do
+      yaml = <<YAML
+en:
+  day_names:
+    - Monday
+    - Tuesday
+YAML
+
+      keys = TidyI18n::TranslationKeys.parse(yaml)
+
+      keys.size.should == 1
+      keys.first.name.should == "en.day_names"
+      keys.first.value.should == ["Monday", "Tuesday"]
+    end
+
+    xit "has a two elements sequence followed by another key" do
+      yaml = <<YAML
+en:
+  day_names:
+    - Monday
+    - Tuesday
+  foo: "Bar"
+YAML
+
+      keys = TidyI18n::TranslationKeys.parse(yaml)
+
+      keys.size.should == 2
+      keys.first.name.should == "en.day_names"
+      keys.first.value.should == ["Monday", "Tuesday"]
+      keys.last.name.should == "en.foo"
+      keys.last.value.should == "Bar"
+    end
+  end
 end
