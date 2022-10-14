@@ -34,9 +34,9 @@ module TidyI18n
         split(".").
         first.
         gsub("/", ".")
-      I18n.translate("#{key_prefix}.#{key}", options)
+      I18n.translate("#{key_prefix}.#{key}", **options)
     else
-      I18n.translate(key, options)
+      I18n.translate(key, **options)
     end
   end
 

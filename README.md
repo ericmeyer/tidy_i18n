@@ -8,6 +8,9 @@ TidyI18n is a gem that wraps the I18n gem. It's purpose is to help you manage yo
  * Searching locale files for duplicate keys
  * Finding missing keys in a given locale
 
+NOTE: This gem uses a nonstandard yaml structure for the translation strings. Instead of e.g. `en.foo.create.success` it uses
+the project route: `en.app.controllers.foo.create.success`.
+
 ## Dependencies
 
  * Ruby

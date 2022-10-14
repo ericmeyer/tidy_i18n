@@ -1,6 +1,6 @@
 spec = Gem::Specification.new do |s|
   s.name        = "tidy_i18n"
-  s.version     = "0.1.3"
+  s.version     = "0.1.5"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Eric Meyer"]
   s.email       = ["emeyer@8thlight.com"]
@@ -9,6 +9,6 @@ spec = Gem::Specification.new do |s|
   s.description = %q{Helpers for I18n. Add ways to encourage clean locale organization.}
   s.files         = Dir.glob('lib/**/*')
   s.require_paths = ["lib"]
-  s.add_runtime_dependency "i18n", "~> 0"
+  s.add_runtime_dependency "i18n", "~> 1"
   s.license     = "MIT"
 end
